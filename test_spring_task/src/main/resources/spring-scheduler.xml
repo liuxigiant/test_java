@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+              http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+              http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+              http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <!--
+        触发器配置的是每隔5秒执行一次，单个任务执行时间是6秒，根据处理结果可总结如下：
+
+        1、当任务A触发的时候，会检查任务A上次触发的线程是否已经执行完成，若没有执行完成，会丢弃本次的触发任务
+        2、总结1中的结论与线程数无关，即当线程为单线程和多个线程时候，结果一致
+
+    -->
+
+
+    <context:component-scan base-package="scheduler"/>
+
+    <!-- 用于支持@Scheduled注解  -->
+    <task:annotation-driven scheduler="myScheduler"/>
+
+    <!-- 不使用@Scheduled注解  -->
+    <task:scheduler id="myScheduler" pool-size="2"/>
+    <task:scheduled-tasks scheduler="myScheduler">
+        <task:scheduled ref="schedulerUtils" method="test" cron= "0/5 * * * * ?"/>
+    </task:scheduled-tasks>
+</beans>

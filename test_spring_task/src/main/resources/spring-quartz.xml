@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+              http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--
+        触发器配置的是每隔5秒执行一次，单个任务执行时间是6秒，根据处理结果可总结如下：
+
+        1、配置jobDetail时候，指定concurrent参数，是否允许任务并发执行
+           concurrent为false，则当任务A触发时候，会检查任务A上次触发的线程是否已经执行完成，若没执行完成，则会放入等待队列，可以防止任务的并发执行
+        2、配置scheduler的时候，指定autoStart参数，配置为false表示不随web服务器的启动而启动scheduler执行容器，可以使用API编码手动控制
+        3、配置scheduler的时候，指定org.quartz.threadPool.threadCount参数，指定的是scheduler执行容器执行线程池的线程数
+           可以为每一个jodDetail配置一个scheduler，并指定theadCount为1，新触发的任务发现没有空闲的线程，则会放入等待队列 ，可以防止任务的并发执行
+            线程数配置成多个也不会对concurrent参数的配置结果有影响。
+
+
+    -->
+
+    <bean id="testQuartz" class="quartz.QuartzUtils" />
+    <bean id="testQuartzDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="testQuartz" />
+        <property name="targetMethod" value="test" />
+        <!-- 并发执行任务配置为false -->
+        <property name="concurrent" value="false" />
+    </bean>
+    <bean id = "testQuartzTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="testQuartzDetail"/>
+        <!-- 每隔5秒执行一次 -->
+        <property name="cronExpression" value="0/5 * * * * ?" />
+    </bean>
+    <bean id="testQuartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="testQuartzTrigger" />
+            </list>
+        </property>
+        <!-- 随容器自启动 -->
+        <property name="autoStartup">
+            <value>false</value>
+        </property>
+        <property name="quartzProperties">
+            <props>
+                <!-- 执行线程数配置为单线程 -->
+                <prop key="org.quartz.threadPool.threadCount">1</prop>
+            </props>
+        </property>
+    </bean>
+</beans>

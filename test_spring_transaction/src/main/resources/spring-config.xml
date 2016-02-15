@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+              http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+              http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
+              http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+              http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+              http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+       <!-- bean管理支持注解 -->
+       <context:component-scan base-package="com"/>
+
+       <!-- 扫描mybatis的mapper -->
+       <mybatis:scan base-package="com.mapper"/>
+
+       <!-- 配置数据源 数据源提供的各种配置尚未指定 第一个库test -->
+       <bean id="dataSource1" class="org.apache.commons.dbcp.BasicDataSource">
+              <property name="url" value="jdbc:mysql://127.0.0.1:3306/test?characterEncoding=UTF-8" />
+              <property name="username" value="root"/>
+              <property name="password" value="root"/>
+       </bean>
+
+       <!-- 配置数据源 数据源提供的各种配置尚未指定 第二个库test2 -->
+       <bean id="dataSource2" class="org.apache.commons.dbcp.BasicDataSource">
+              <property name="url" value="jdbc:mysql://127.0.0.1:3306/test2?characterEncoding=UTF-8" />
+              <property name="username" value="root"/>
+              <property name="password" value="root"/>
+       </bean>
+
+       <!-- 动态数据源 -->
+       <bean id = "dataSource" class="com.dao.DynamicDataSource">
+              <property name="targetDataSources">
+                     <map>
+                            <entry key = "dataSource1" value-ref="dataSource1"/>
+                            <entry key = "dataSource2" value-ref="dataSource2"/>
+                     </map>
+              </property>
+              <property name="defaultTargetDataSource" ref="dataSource1"/>
+       </bean>
+
+       <!-- 配置sqlSessionFactory -->
+       <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+              <property name="dataSource" ref="dataSource" />
+              <property name="configLocation" value="classpath:mybatis-config.xml" />
+       </bean>
+
+       <!-- 配置事物管理器 -->
+       <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+              <property name="dataSource" ref="dataSource"/>
+       </bean>
+
+       <!-- 支持注解事物 -->
+       <tx:annotation-driven transaction-manager="transactionManager" order="1"/>
+
+
+
+       <!-- 数据源动态路由拦截器 -->
+       <!--
+              由于动态数据源路由和事物注解@Transactional都是使用spring AOP实现，所以需要指定顺序，动态数据源路由的AOP需要在事物注解@Transactional之前执行
+              可通过指定动态数据源路由的AOP的order属性为0来实现（order越小，越优先执行）
+              order可以通过xml和类注解两种方式实现：
+              1、在动态数据源路由的AOPDataSourceInterceptor添加@Order(0)   //经测试：order在此处指定不能保证在事物直接之前执行。需要在xml中配置
+              2、在xml配置AOP时候指定order属性
+       -->
+
+       <bean id = "dataSourceInterceptor" class="com.interceptor.DataSourceInterceptor"/>
+       <aop:config>
+              <aop:pointcut id="serviceLayer" expression="execution(* com.service.impl.*.*(..))"/>
+              <aop:aspect id = "datasourceAspect" ref="dataSourceInterceptor" order = "0">
+              <!--<aop:aspect id = "datasourceAspect" ref="dataSourceInterceptor">-->
+                     <aop:before method="setDataSource" pointcut-ref="serviceLayer"/>
+              </aop:aspect>
+       </aop:config>
+</beans>

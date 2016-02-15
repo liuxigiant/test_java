@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+              http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+              http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+              http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <!--
+          1、 异步注解是使用spring AOP实现的，所以需要符合AOP的调用才能正确使用异步调用，spring AOP的实现限定于外部调用且方法需要使public，所以若是类内部的方法调用，即使被调用方法有@Async注解，也不能异步执行。
+          2、测试时候需要注意：不能在本类中使用main方法调用测试（参考1）；junit单元测试方法执行完后会结束JVM，所以在测试调用异步方法时候，需要使主线程等待，才能看出方法异步调用的效果。
+          3、@Async是基于java concurrent包实现的，所以异步调用可以有返回值future
+          4、异步调用过程中，被调用者发生异常，调用者无法感知，可以自己实现AsyncTaskExecutor接口，处理异常(Spring 4中提供了AsyncUncaughtExceptionHandler接口，通过annotation-driven元素的handler-exception配置)
+
+
+
+
+
+          使用spring 4提供了AsyncUncaughtExceptionHandler接口处理异常步骤：
+          (ps：返回值为Future的异步调用不用自定义异常，异步方法调用者在处理结果Future调用get方法时候会抛出异步方法执行时的异常；故只有void的异步调用才需要自定义异常处理，因为异步方法调用者无法感知异步方法抛出异常)
+          1、修改pom中引用的spring版本为4.2.3.RELEASE
+          2、实现异常处理类AsyncExceptionHandler（目前本类已注释掉）
+          3、修改本配置文件中spring-task的xsd版本为4.2   http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.2.xsd
+          4、修改配置文件如下：
+          <context:component-scan base-package="async" />
+
+        <bean id = "exceptionHandler" class="async.AsyncExceptionHandler"/>
+        <task:annotation-driven exception-handler="exceptionHandler"/>
+
+        <bean id = "exceptionExecutor" class="async.ExceptionHandlerTaskExecutor">
+            <property name="asyncTaskExecutor" >
+                <task:executor id="myExecutor" keep-alive="5" pool-size="5-10" queue-capacity="2000" rejection-policy="ABORT" />
+            </property>
+        </bean>
+        ps:配置文件中annotation-driven 配置了exception-handler之后，会去寻找annotation-driven 配置的executor，若不配置，则会寻找TaskExecutor类型的bean，所以这种情况下不能配置两个executor;
+            自定义异常处理类需要继承SimpleAsyncUncaughtExceptionHandler，实现AsyncUncaughtExceptionHandler接口不能在annotation-driven 中配置
+
+    -->
+
+    <context:component-scan base-package="async" />
+
+    <!-- 用于支持@Async注解  -->
+    <task:annotation-driven />
+    <task:executor id="myExecutor" keep-alive="5" pool-size="5-10" queue-capacity="2000" rejection-policy="ABORT" />
+
+    <!-- 处理异常的Executor -->
+    <bean id = "exceptionExecutor" class="async.ExceptionHandlerTaskExecutor">
+        <property name="asyncTaskExecutor" ref="myExecutor"/>
+    </bean>
+</beans>
