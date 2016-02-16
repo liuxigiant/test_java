@@ -1,11 +1,11 @@
 package com.dao;
 
 /**
- * DataSourceÉÏÏÂÎÄ¾ä±ú£¬Í¨¹ı´ËÀàÉèÖÃĞèÒª·ÃÎÊµÄ¶ÔÓ¦Êı¾İÔ´
+ * DataSourceä¸Šä¸‹æ–‡å¥æŸ„ï¼Œé€šè¿‡æ­¤ç±»è®¾ç½®éœ€è¦è®¿é—®çš„å¯¹åº”æ•°æ®æº
  */
 public class DataSourceContextHolder {
     /**
-     * DataSourceÉÏÏÂÎÄ£¬Ã¿¸öÏß³Ì¶ÔÓ¦ÏàÓ¦µÄÊı¾İÔ´key
+     * DataSourceä¸Šä¸‹æ–‡ï¼Œæ¯ä¸ªçº¿ç¨‹å¯¹åº”ç›¸åº”çš„æ•°æ®æºkey
      */
     private static final ThreadLocal<String> contextHolder = new ThreadLocal<String>();
 

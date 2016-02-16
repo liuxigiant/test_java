@@ -17,7 +17,7 @@ public class AsyncUtils
     {
         try
         {
-            //µÈ´ı3Ãë£¬±ãÓÚÏÔÊ¾Òì²½Ö´ĞĞµÄĞ§¹û
+            //ç­‰å¾…3ç§’ï¼Œä¾¿äºæ˜¾ç¤ºå¼‚æ­¥æ‰§è¡Œçš„æ•ˆæœ
             Thread.sleep(3000);
             System.out.println("Method: async");
             System.out.println("Method: async thread name--------" + Thread.currentThread().getName());
@@ -29,28 +29,28 @@ public class AsyncUtils
     }
 
     /**
-     * ´øÓĞ·µ»ØÖµµÄÒì²½µ÷ÓÃ
+     * å¸¦æœ‰è¿”å›å€¼çš„å¼‚æ­¥è°ƒç”¨
      * @return
      */
     @Async("myExecutor")
     public Future<String> asyncWithReturn() throws Exception
     {
-        //µÈ´ı3Ãë£¬±ãÓÚÏÔÊ¾Òì²½Ö´ĞĞµÄĞ§¹û
+        //ç­‰å¾…3ç§’ï¼Œä¾¿äºæ˜¾ç¤ºå¼‚æ­¥æ‰§è¡Œçš„æ•ˆæœ
         Thread.sleep(3000);
         System.out.println("Method: asyncWithReturn");
         System.out.println("Method: asyncWithReturn thread name--------" + Thread.currentThread().getName());
 
-        //ÓĞ·µ»ØÖµFutureµÄÒì²½·½·¨µ÷ÓÃ£¬Å×³öÒì³££¬¿É±»·½·¨µ÷ÓÃÕß²¶»ñ´¦Àí
+        //æœ‰è¿”å›å€¼Futureçš„å¼‚æ­¥æ–¹æ³•è°ƒç”¨ï¼ŒæŠ›å‡ºå¼‚å¸¸ï¼Œå¯è¢«æ–¹æ³•è°ƒç”¨è€…æ•è·å¤„ç†
 //        throw new Exception("asyncWithReturn_Error");
 
-        //·µ»Ø½á¹û FutureÊÇ¸ö½Ó¿Ú£¬¾ßÌåµÄÀàĞÍÎªAsyncResult
+        //è¿”å›ç»“æœ Futureæ˜¯ä¸ªæ¥å£ï¼Œå…·ä½“çš„ç±»å‹ä¸ºAsyncResult
         return new AsyncResult<String>("asyncWithReturn invoke success");
     }
 
     @Async("exceptionExecutor")
     public void asyncException() throws Exception
     {
-        //µÈ´ı3Ãë£¬±ãÓÚÏÔÊ¾Òì²½Ö´ĞĞµÄĞ§¹û
+        //ç­‰å¾…3ç§’ï¼Œä¾¿äºæ˜¾ç¤ºå¼‚æ­¥æ‰§è¡Œçš„æ•ˆæœ
         Thread.sleep(3000);
         System.out.println("Method: async");
         System.out.println("Method: async thread name--------" + Thread.currentThread().getName());
@@ -58,7 +58,7 @@ public class AsyncUtils
     }
 
     /**
-     * Òì²½·½·¨async()ÔÚÄÚ²¿µ÷ÓÃÊÇ²»ÄÜÉúĞ§µÄ£¬ËùÒÔ²»ÄÜÔÚtestÖĞµ÷ÓÃ£¬Ò²²»ÄÜ±¾ÀàÖĞÊ¹ÓÃmain·½·¨²âÊÔ
+     * å¼‚æ­¥æ–¹æ³•async()åœ¨å†…éƒ¨è°ƒç”¨æ˜¯ä¸èƒ½ç”Ÿæ•ˆçš„ï¼Œæ‰€ä»¥ä¸èƒ½åœ¨testä¸­è°ƒç”¨ï¼Œä¹Ÿä¸èƒ½æœ¬ç±»ä¸­ä½¿ç”¨mainæ–¹æ³•æµ‹è¯•
      */
     public void test()
     {

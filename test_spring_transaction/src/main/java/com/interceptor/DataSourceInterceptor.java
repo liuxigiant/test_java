@@ -7,11 +7,11 @@ import org.aspectj.lang.JoinPoint;
 /**
  * Created by liuxi6 on 2016/1/11.
  */
-//@Order(0)  // execute before @Transactional  »òÕßÔÚspringÅäÖÃÎÄ¼şÖĞÅäÖÃÇĞÃæÊ±ºòÖ¸¶¨order=0   //¾­²âÊÔ£ºorderÔÚ´Ë´¦Ö¸¶¨²»ÄÜ±£Ö¤ÔÚÊÂÎïÖ±½ÓÖ®Ç°Ö´ĞĞ¡£ĞèÒªÔÚxmlÖĞÅäÖÃ
+//@Order(0)  // execute before @Transactional  æˆ–è€…åœ¨springé…ç½®æ–‡ä»¶ä¸­é…ç½®åˆ‡é¢æ—¶å€™æŒ‡å®šorder=0   //ç»æµ‹è¯•ï¼šorderåœ¨æ­¤å¤„æŒ‡å®šä¸èƒ½ä¿è¯åœ¨äº‹ç‰©ç›´æ¥ä¹‹å‰æ‰§è¡Œã€‚éœ€è¦åœ¨xmlä¸­é…ç½®
 public class DataSourceInterceptor {
 
     /**
-     * ¸ù¾İ¹æÔò¶¯Ì¬Â·ÓÉÊı¾İÔ´
+     * æ ¹æ®è§„åˆ™åŠ¨æ€è·¯ç”±æ•°æ®æº
      * @param joinpoint
      */
     public void setDataSource(JoinPoint joinpoint){

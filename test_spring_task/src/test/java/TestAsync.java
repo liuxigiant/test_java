@@ -18,7 +18,7 @@ public class TestAsync
     private AsyncUtils asyncUtils;
 
     /**
-     * Òì²½µ÷ÓÃ
+     * å¼‚æ­¥è°ƒç”¨
      * @throws Exception
      */
     @Test
@@ -29,12 +29,12 @@ public class TestAsync
         asyncUtils.async();
         System.out.println("Method: main end--------");
 
-        //ÓÉÓÚjunit½áÊøÖ®ºó»á½áÊøjvm£¬´Ë´¦ÈÃÖ÷Ïß³ÌµÈ´ı²ÅÄÜ²âÊÔÈÎÎñµ÷¶ÈĞ§¹û
+        //ç”±äºjunitç»“æŸä¹‹åä¼šç»“æŸjvmï¼Œæ­¤å¤„è®©ä¸»çº¿ç¨‹ç­‰å¾…æ‰èƒ½æµ‹è¯•ä»»åŠ¡è°ƒåº¦æ•ˆæœ
         Thread.sleep(10000);
     }
 
     /**
-     * ÓĞ·µ»ØÖµµÄÒì²½µ÷ÓÃ
+     * æœ‰è¿”å›å€¼çš„å¼‚æ­¥è°ƒç”¨
      * @throws Exception
      */
     @Test
@@ -44,10 +44,10 @@ public class TestAsync
         System.out.println("Method: main thread name--------" + Thread.currentThread().getName());
         Future<String> result = asyncUtils.asyncWithReturn();
         System.out.println("Method: main end--------");
-        //Ñ­»·µÈ´ıÒì²½·µ»Ø
+        //å¾ªç¯ç­‰å¾…å¼‚æ­¥è¿”å›
         while (true)
         {
-            //¼ì²éÒì²½·½·¨ÊÇ·ñ·µ»Ø½á¹û
+            //æ£€æŸ¥å¼‚æ­¥æ–¹æ³•æ˜¯å¦è¿”å›ç»“æœ
             if (result.isDone())
             {
                 System.out.println("Welcome back ! ");
@@ -61,12 +61,12 @@ public class TestAsync
             Thread.sleep(500);
         }
 
-        //ÓÉÓÚjunit½áÊøÖ®ºó»á½áÊøjvm£¬´Ë´¦ÈÃÖ÷Ïß³ÌµÈ´ı²ÅÄÜ²âÊÔÈÎÎñµ÷¶ÈĞ§¹û
+        //ç”±äºjunitç»“æŸä¹‹åä¼šç»“æŸjvmï¼Œæ­¤å¤„è®©ä¸»çº¿ç¨‹ç­‰å¾…æ‰èƒ½æµ‹è¯•ä»»åŠ¡è°ƒåº¦æ•ˆæœ
         Thread.sleep(10000);
     }
 
     /**
-     * ´¦ÀíÒì³£Òì²½µ÷ÓÃ
+     * å¤„ç†å¼‚å¸¸å¼‚æ­¥è°ƒç”¨
      * @throws Exception
      */
     @Test
@@ -77,7 +77,7 @@ public class TestAsync
         asyncUtils.asyncException();
         System.out.println("Method: main end--------");
 
-        //ÓÉÓÚjunit½áÊøÖ®ºó»á½áÊøjvm£¬´Ë´¦ÈÃÖ÷Ïß³ÌµÈ´ı²ÅÄÜ²âÊÔÈÎÎñµ÷¶ÈĞ§¹û
+        //ç”±äºjunitç»“æŸä¹‹åä¼šç»“æŸjvmï¼Œæ­¤å¤„è®©ä¸»çº¿ç¨‹ç­‰å¾…æ‰èƒ½æµ‹è¯•ä»»åŠ¡è°ƒåº¦æ•ˆæœ
         Thread.sleep(10000);
     }
 }

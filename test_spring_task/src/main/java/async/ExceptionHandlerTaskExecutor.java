@@ -33,7 +33,7 @@ public class ExceptionHandlerTaskExecutor implements AsyncTaskExecutor
     }
 
     /**
-     * 封装异常处理
+     * 灏佽寮傚父澶勭悊
      * @return
      */
     private Callable createWrappedCallable(final Callable callable)
@@ -52,7 +52,7 @@ public class ExceptionHandlerTaskExecutor implements AsyncTaskExecutor
     }
 
     /**
-     * 封装异常处理
+     * 灏佽寮傚父澶勭悊
      * @param runnable
      * @return
      */
@@ -71,7 +71,7 @@ public class ExceptionHandlerTaskExecutor implements AsyncTaskExecutor
     }
 
     /**
-     * 处理异常
+     * 澶勭悊寮傚父
      * @param e
      */
     private void handleException(Exception e)

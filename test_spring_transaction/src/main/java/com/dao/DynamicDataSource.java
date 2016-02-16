@@ -3,7 +3,7 @@ package com.dao;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 /**
- * 动态数据源
+ * 鍔ㄦ�佹暟鎹簮
  */
 public class DynamicDataSource extends AbstractRoutingDataSource {
     @Override

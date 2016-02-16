@@ -14,7 +14,7 @@ import java.util.Random;
 public class SchedulerUtils
 {
     /**
-     * ²»Ê¹ÓÃ@Scheduled×¢½â
+     * ä¸ä½¿ç”¨@Scheduledæ³¨è§£
      * @throws InterruptedException
      */
     public void test() throws InterruptedException
@@ -25,7 +25,7 @@ public class SchedulerUtils
         System.out.println(Thread.currentThread().getName() + "--out");
     }
 
-    //¾­²âÊÔ   Ã¿¸ô11ÃëÖ´ÐÐÒ»´Î
+    //ç»æµ‹è¯•   æ¯éš”11ç§’æ‰§è¡Œä¸€æ¬¡
     @Scheduled(fixedDelay = 5000)
     public void testFixedDelay() throws Exception{
         System.out.println(String.format("testFixedDelay exe-->%s, thread-->%s",

@@ -19,25 +19,25 @@ public class UserServiceImpl implements UserService
     private UserMapper userMapper;
 
     /**
-     * ÎªÁË²âÊÔ·½·¨¿É¼ûĞÔ£¬UserServiceImpl2Ã»ÓĞÊµÏÖ½Ó¿Ú
+     * ä¸ºäº†æµ‹è¯•æ–¹æ³•å¯è§æ€§ï¼ŒUserServiceImpl2æ²¡æœ‰å®ç°æ¥å£
      */
     @Resource(name = "userServiceImpl2")
     private UserServiceImpl2 userServiceImpl2;
 
-//     @Transactional(rollbackFor = Exception.class)
-     public void updateTestTrans() throws Exception{
+    //     @Transactional(rollbackFor = Exception.class)
+    public void updateTestTrans() throws Exception{
         String userName = "name_" + System.currentTimeMillis();
         System.out.println(String.format("userName = %s", userName));
 
 //        this.updateUserName(userName, 1);
 //        userServiceImpl2.testTrans();
-         try {//²âÊÔ¶¯Ì¬Êı¾İÔ´µÄÒì³£»Ø¹ö
-             userServiceImpl2.addUser(userName);
-         }catch (Exception e){
-             System.out.println("error-->" + e.getMessage());
-         }
+        try {//æµ‹è¯•åŠ¨æ€æ•°æ®æºçš„å¼‚å¸¸å›æ»š
+            userServiceImpl2.addUser(userName);
+        }catch (Exception e){
+            System.out.println("error-->" + e.getMessage());
+        }
 
-         userServiceImpl2.updateUserName(userName, 1);
+        userServiceImpl2.updateUserName(userName, 1);
 //        this.addUser(userName);
 
 //        User user = new User();
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService
 //        user.setUserName(userName);
 //        userMapper.update(user);
 
-         //²âÊÔ·½·¨¿É¼ûĞÔ
+        //æµ‹è¯•æ–¹æ³•å¯è§æ€§
 //        userServiceImpl2.addUser(userName);
 
 //        throw new Exception("error");
