@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService
     @Resource(name = "userServiceImpl2")
     private UserServiceImpl2 userServiceImpl2;
 
-    //     @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     public void updateTestTrans() throws Exception{
         String userName = "name_" + System.currentTimeMillis();
         System.out.println(String.format("userName = %s", userName));

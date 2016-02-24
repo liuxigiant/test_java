@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public interface UserMapper
 {
-    public void insert(User user);
+    public Integer insert(User user);
 
     public void update(User user);
 }

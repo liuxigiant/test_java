@@ -35,6 +35,6 @@ public class UserServiceImpl2
         user.setUserName(userName);
         userMapper.insert(user);
 
-        throw new Exception("error");
+//        throw new Exception("error");
     }
 }
