@@ -12,6 +12,7 @@
         <module>test_spring_task</module>
         <module>test_spring_transaction</module>
         <module>test_spring_ltw</module>
+        <module>test_spring_jta</module>
     </modules>
 
     <properties>
