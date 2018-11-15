@@ -5,9 +5,6 @@ import org.springframework.core.task.AsyncTaskExecutor;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
-/**
- * Created by liuxi6 on 2015/12/17.
- */
 public class ExceptionHandlerTaskExecutor implements AsyncTaskExecutor
 {
     private AsyncTaskExecutor asyncTaskExecutor;

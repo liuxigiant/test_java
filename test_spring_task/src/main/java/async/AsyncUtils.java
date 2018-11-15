@@ -6,9 +6,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.Future;
 
-/**
- * Created by liuxi6 on 2015/12/15.
- */
 @Component
 public class AsyncUtils
 {

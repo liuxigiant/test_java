@@ -7,9 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Created by liuxi6 on 2016/2/23.
- */
 @Controller
 public class TestController {
 

@@ -4,9 +4,6 @@
 //
 //import java.lang.reflect.Method;
 //
-///**
-// * Created by liuxi6 on 2015/12/17.
-// */
 //public class AsyncExceptionHandler extends SimpleAsyncUncaughtExceptionHandler
 //{
 //    @Override

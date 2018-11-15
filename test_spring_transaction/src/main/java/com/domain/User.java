@@ -1,8 +1,5 @@
 package com.domain;
 
-/**
- * Created by liuxi6 on 2015/12/18.
- */
 public class User
 {
     private Integer userId;

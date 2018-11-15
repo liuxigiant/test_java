@@ -6,9 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Created by liuxi6 on 2015/12/18.
- */
 @Service("userServiceImpl2")
 public class UserServiceImpl2
 {

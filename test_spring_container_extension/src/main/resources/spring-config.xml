@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+       <bean id = "initMethodBeanService" class="name.liuxi.spring.ext.InitMethodBeanService" init-method="init">
+              <property name="f2" value="2"/>
+       </bean>
+
+       <bean id = "initializingBeanService" class="name.liuxi.spring.ext.InitializingBeanService" init-method="init">
+              <property name="f2" value="2"/>
+       </bean>
+
+       <bean class="name.liuxi.spring.ext.BeanPostProcessorService"/>
+       <bean class="name.liuxi.spring.ext.BeanFactoryPostProcessorService"/>
+
+       <bean id = "postConstructService" class="name.liuxi.spring.ext.PostConstructService" init-method="init">
+              <property name="f2" value="2"/>
+       </bean>
+
+       <bean id="user" class="name.liuxi.spring.ext.UserBean">
+              <property name="userName" value="haha"/>
+       </bean>
+</beans>

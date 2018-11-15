@@ -7,9 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
-/**
- * Created by liuxi6 on 2015/12/15.
- */
 @Component("schedulerUtils")
 public class SchedulerUtils
 {

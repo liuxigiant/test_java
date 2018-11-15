@@ -13,11 +13,16 @@
         <module>test_spring_transaction</module>
         <module>test_spring_ltw</module>
         <module>test_spring_jta</module>
+        <module>test_javase</module>
+        <module>test_spring_data_es</module>
+        <module>test_xml</module>
+        <module>test_spring_aop</module>
+        <module>test_spring_container_extension</module>
     </modules>
 
     <properties>
-        <spring.version>3.2.15.RELEASE</spring.version>
-        <!--<spring.version>4.2.3.RELEASE</spring.version>-->
+        <!--<spring.version>3.2.15.RELEASE</spring.version>-->
+        <spring.version>4.3.0.RELEASE</spring.version>
         <mybatis.version>3.2.3</mybatis.version>
         <mybatis-spring.version>1.2.2</mybatis-spring.version>
     </properties>
@@ -76,7 +81,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
+            <version>4.12</version>
             <scope>test</scope>
         </dependency>
 

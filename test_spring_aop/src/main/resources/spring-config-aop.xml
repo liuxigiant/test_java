@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+              http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+              http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+              http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+       <!-- 自动扫描 -->
+       <context:component-scan base-package="name.liuxi.spring.aop.service" />
+
+       <!-- To enable @AspectJ support with XML based configuration -->
+       <aop:aspectj-autoproxy proxy-target-class="true" />
+
+       <bean id="testAop" class="name.liuxi.spring.aop.AOPUtil" />
+       <!--<bean id="logInterceptor" class="com.jd.topup.util.interceptor.LogAspect" />-->
+       <aop:config>
+              <aop:pointcut id="serviceLayer" expression="execution(* name.liuxi.spring.aop.service.impl.*.*(..))" />
+              <aop:aspect id="testAopAspect" ref="testAop">
+                     <aop:around method="doAround" pointcut-ref="serviceLayer" />
+              </aop:aspect>
+       </aop:config>
+
+
+</beans>

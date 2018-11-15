@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:elasticsearch="http://www.springframework.org/schema/data/elasticsearch"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/data/elasticsearch http://www.springframework.org/schema/data/elasticsearch/spring-elasticsearch.xsd
+                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- bean管理支持注解 -->
+    <context:component-scan base-package="name.liuxi.service"/>
+
+    <!-- Spring data 自动扫描repository接口，生成实现类 -->
+    <elasticsearch:repositories base-package="name.liuxi.es" />
+
+    <!-- ip:port换成具体的ip和端口，多个以逗号分隔 -->
+    <elasticsearch:transport-client id="client" cluster-nodes="ip:port" cluster-name="elasticsearch" />
+
+    <bean name="elasticsearchTemplate" class="org.springframework.data.elasticsearch.core.ElasticsearchTemplate">
+        <constructor-arg ref="client"/>
+    </bean>
+
+    <bean name="orderRepositoryImpl" class="name.liuxi.es.impl.OrderRepositoryImpl">
+        <property name="elasticsearchTemplate" ref="elasticsearchTemplate"/>
+    </bean>
+</beans>

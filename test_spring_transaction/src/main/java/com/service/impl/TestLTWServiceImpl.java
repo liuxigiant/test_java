@@ -7,9 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Created by liuxi6 on 2016/2/23.
- */
 @Service
 public class TestLTWServiceImpl implements TestLTWService {
 

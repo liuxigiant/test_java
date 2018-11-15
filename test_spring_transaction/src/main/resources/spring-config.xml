@@ -27,7 +27,7 @@
 
        <!-- 配置数据源 数据源提供的各种配置尚未指定 第二个库test2 -->
        <bean id="dataSource2" class="org.apache.commons.dbcp.BasicDataSource">
-              <property name="url" value="jdbc:mysql://127.0.0.1:3306/test2?characterEncoding=UTF-8" />
+              <property name="url" value="jdbc:mysql://127.0.0.1:3306/test?characterEncoding=UTF-8" />
               <property name="username" value="root"/>
               <property name="password" value="root"/>
               <property name="driverClassName" value="com.mysql.jdbc.Driver" />

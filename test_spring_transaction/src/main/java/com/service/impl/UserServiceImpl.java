@@ -9,9 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
-/**
- * Created by liuxi6 on 2015/12/18.
- */
 @Service("userService")
 public class UserServiceImpl implements UserService
 {
@@ -29,15 +26,15 @@ public class UserServiceImpl implements UserService
         String userName = "name_" + System.currentTimeMillis();
         System.out.println(String.format("userName = %s", userName));
 
-//        this.updateUserName(userName, 1);
+        this.updateUserName(userName, 1);
 //        userServiceImpl2.testTrans();
-        try {//测试动态数据源的异常回滚
-            userServiceImpl2.addUser(userName);
-        }catch (Exception e){
-            System.out.println("error-->" + e.getMessage());
-        }
-
-        userServiceImpl2.updateUserName(userName, 1);
+//        try {//测试动态数据源的异常回滚
+//            userServiceImpl2.addUser(userName);
+//        }catch (Exception e){
+//            System.out.println("error-->" + e.getMessage());
+//        }
+//
+//        userServiceImpl2.updateUserName(userName, 1);
 //        this.addUser(userName);
 
 //        User user = new User();
@@ -51,12 +48,14 @@ public class UserServiceImpl implements UserService
 //        throw new Exception("error");
     }
 
-    public void updateUserName(String userName, Integer userId)
+//    @Transactional(rollbackFor = Exception.class)
+    public void updateUserName(String userName, Integer userId) throws Exception
     {
         User user = new User();
         user.setUserId(userId);
         user.setUserName(userName);
         userMapper.update(user);
+//        throw new Exception("hah");
     }
 
     private void addUser(String userName) throws Exception

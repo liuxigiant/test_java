@@ -7,9 +7,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.concurrent.Future;
 
-/**
- * Created by liuxi6 on 2015/12/15.
- */
 @ContextConfiguration("classpath:spring-async.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TestAsync
